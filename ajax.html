@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Requests</title>
+</head>
+<body>
+    
+    <button type="button"> Carregar Lista </button>
+
+
+    <script>
+
+        document.querySelector("button").addEventListener(click, (e)=> {
+
+            const ajax = new XMLHttpRequest()
+
+            // configuração da requisição assíncrona ajax:
+
+            ajax.onload = () => {
+                console.log(ajax)
+            }
+            ajax.onerror = () => {
+                console.error(ajax)
+            }
+
+            // configuração que diz qual a requisição que será "aberta":
+
+            ajax.open("GET", "http://localhost:3000/produtos")
+
+            //ajax.send() envia efetivamente a requisiçlão
+            ajax.send()
+
+            
+        })
+
+    </script>
+
+</body>
+</html>
