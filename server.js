@@ -8,7 +8,11 @@ const db = new NeDB( { filename: "tb_produtos", autoload: true } )
 
 server.use(express.json())
 server.use(express.urlencoded( {extended: true} ))
+server.use((req, res, next) => {
 
+    res.setHeader("Access-Control-Allow-Origin", "*")
+    next()
+})
 server.get("/produtos", (req, res) => {
 
 

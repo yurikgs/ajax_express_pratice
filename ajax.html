@@ -12,7 +12,7 @@
 
     <script>
 
-        document.querySelector("button").addEventListener(click, (e)=> {
+        document.querySelector("button").addEventListener("click", (e)=> {
 
             const ajax = new XMLHttpRequest()
 
@@ -20,6 +20,7 @@
 
             ajax.onload = () => {
                 console.log(ajax)
+                console.log(JSON.parse(ajax.response))
             }
             ajax.onerror = () => {
                 console.error(ajax)
@@ -32,7 +33,7 @@
             //ajax.send() envia efetivamente a requisiçlão
             ajax.send()
 
-            
+
         })
 
     </script>
