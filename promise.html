@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Requests</title>
+</head>
+<body>
+    
+    <button type="button"> Carregar Lista </button>
+
+
+    <script>
+
+        function getProdutos () {
+
+            return new Promise((sucesso, falha) => {
+
+                const ajax = new XMLHttpRequest()
+
+                ajax.onload = () => {
+                    // chamamos a função resolve / sucesso da promise
+                    // onde queremos o retorno, e passando o retorno como
+                    // parametro
+                    sucesso(JSON.parse(ajax.response))
+                }
+
+                ajax.onerror = () => {
+                    // configuramos  a função reject/falha de maneira ananáloga
+                    // à configuração da função sucesso.
+                        falha(ajax)
+                            }
+
+                ajax.open("GET", "http://localhost:3000/produtos")
+
+                ajax.send()
+
+
+            })
+
+        }
+
+        document.querySelector("button").addEventListener("click", (e) => {
+
+            // "respostaJSON" abaixo se refere ao valor retornado
+            // na função anterior getProdutos, ou seja, o JSON.parse(ajax.response)
+            // já o cacth recebe o que vier da função "falha()" da promise
+            getProdutos()
+            .then((respostaJSON) => {
+                console.log(respostaJSON)
+            })
+            .catch((respostaAjax) => {
+                console.error(respostaAjax)
+            })
+
+        })
+
+        // Note a vantagem do encadeamento. O retorno que for passado na 
+        // funcao sucesso da promise poderá ser encaminhado para uma próxima
+        // subrotina .then() no encadeamento, múltiplas vezes
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!-- Async/ Await transforma uma promessa em síncrona 
+- faz o código esperar a resposta para continuar executando.
+Isso é muito importrante quando o código subsequente depende
+da resposta que antes seria assíncrona -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Requests</title>
+</head>
+<body>
+    
+    <button type="button"> Carregar Lista </button>
+    <!-- no front end, caso não queira usar cdn, basta instalar 
+    o axios normalmente com o node, e setar o caminho adquadamente na pasta
+    dist -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+
+
+        document.querySelector("button").addEventListener("click", async (e) => {
+
+            // o catch da promise pode ser substituído
+            // usando-se o try catch
+
+            try {
+                const resp = await axios.get("http://localhost:3000/produtos")
+                console.log(resp.data)
+            } catch (err) {
+                console.log(err)
+            }
+            
+            
+            console.log("Esta frase foi escrita de forma síncrona! Por isso executou depois da impressão dos dados vindos do axios.")
+            
+            
+
+        })
+
+
+    </script>
+
+</body>
+</html>
